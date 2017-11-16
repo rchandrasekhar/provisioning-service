@@ -8,10 +8,14 @@ Restful api for user registration, verify account by email, fetch details on ver
 	-	Pincode
 	On successful registration UserId will be generated.
 
+	![Alt text](/package/src/site/resources/docs/DB-UserCreation.jpg?raw=true "User creation- with random ID")
+
 	2. Create a restful api to get login for registered user. 
 	-	Call login api with UserId
 	-	Send login link (http-link) to his registered email.
 	-	Login-link expires in 15 min.
+
+	![Alt text](/package/src/site/resources/docs/EmailVerification.png?raw=true "Email verification- with ID")
 
 	3. User opens given login-link. If login-link is valid and not expired. Show user details.
 	-	Name

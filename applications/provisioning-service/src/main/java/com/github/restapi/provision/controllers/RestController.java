@@ -125,7 +125,7 @@ public class RestController implements ServletContextAware {
 						Applog.info("login,"+operation.getId()+","+createJson.optString("fax_number")+","+createJson.optString("email_id")+",success");
 						
 						// Send email with http-link to user email id
-						String bodyText = "Dear "+u.getName()+",\nCongratulations! You have been registered successfully on test service!!\n\nPlease click the link below to activate your account:\n http://localhost:8080/rest/get/confirmAction?validationString="+u.getId()+" \n Best regards,\nCommunications Team\nNote: This is a system generated e-mail, please do not reply to it.\n\n*** This message is intended only for the person or entity to which it is addressed and may contain confidential and/or privileged information. If you have received this message in error, please notify the sender immediately and delete this message from your system ***";
+						String bodyText = "Dear "+u.getName()+",\nCongratulations! You have been registered successfully on test service!!\n\nPlease click the link below to activate your account:\nhttp://localhost:8080/rest/get/confirmAction?validationString="+u.getId()+" \nBest regards,\nCommunications Team\nNote: If you don’t use this link within 15 minutes, it will expire. This is a system generated e-mail, please do not reply to it.\n\n*** This message is intended only for the person or entity to which it is addressed and may contain confidential and/or privileged information. If you have received this message in error, please notify the sender immediately and delete this message from your system ***";
 						try {
 							EmailUtils.send("rchandrasekhar.reddy@gmail.com", "Registration Confirmation", bodyText);
 						} catch (Exception e) {
