@@ -7,9 +7,6 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +19,13 @@ import com.github.restapi.provision.model.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserDAOTest extends BaseUnitTester {
 	
-	
 	@Test
 	public void testEmailVerify() throws JSONException {
 		request.addParameter("validationString", "3206");
 		RestController.setUserDAO(userDAO);
 		String res = RestController.get(request, response);
+		// Just for showing the return output for requirement: If login-link is valid and not expired. Remove it later
+		System.out.println(res);
 		assertNotNull(res);
 	}
 	

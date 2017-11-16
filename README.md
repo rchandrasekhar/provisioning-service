@@ -23,6 +23,11 @@ Restful api for user registration, verify account by email, fetch details on ver
 	-	Pincode
 	You can just represent data as JSON.
 
+	![Alt text](/package/src/site/resources/docs/FetchDetailsOnLink.png?raw=true "Fetch details from the link- with ID")
+
+Technologoes used: Java/J2ee/Spring, Jackson library for rest object mapping, MongoDB
+Tools Used	 : RoboMongo for DB view, Eclipse (Mars), Gmail
+
 - TODO: 
 	4. Create a restful api to get current temperature by pincode
 	-	Use https://openweathermap.org/current api
