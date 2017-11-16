@@ -1,0 +1,2 @@
+1.0
+	Nov 15, 2017 - Initial version of the provisioning service module

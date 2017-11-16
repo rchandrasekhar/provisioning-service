@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.restapi.codetest</groupId>
+        <artifactId>root-base</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.github.restapi.codetest.rpm</groupId>
+    <artifactId>provisioning-service-rpm-base</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Rest API :: RPM Base</name>
+
+    <description>Base RPM module for application modules</description>
+
+    <profiles>
+       <profile> 
+          <id>rpm</id>
+          <modules>
+             <module>provisioning-service-interface</module>
+          </modules>
+      </profile>
+    </profiles>
+
+</project>

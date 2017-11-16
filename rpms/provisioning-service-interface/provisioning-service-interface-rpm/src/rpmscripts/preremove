@@ -1,0 +1,2 @@
+/usr/java/jboss7/bin/jboss-cli.sh -c --command="undeploy provisioning-service.war --all-relevant-server-groups"
+

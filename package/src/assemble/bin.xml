@@ -1,0 +1,34 @@
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <moduleSets>
+    <moduleSet>
+      <excludes>
+      </excludes>
+      <binaries>
+        <includeDependencies>false</includeDependencies>
+	<unpack>false</unpack>
+        <outputDirectory>/</outputDirectory>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+  <files>
+    <file>
+      <source>src/site/resources/RELEASE_NOTES.txt</source>
+      <outputDirectory>/</outputDirectory>
+      <filtered>true</filtered>
+    </file>
+  </files>
+  <fileSets>
+    <fileSet>
+      <directory>src/site/resources/docs</directory>
+      <includes>
+        <include>**</include>
+      </includes>
+      <outputDirectory>/docs</outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>

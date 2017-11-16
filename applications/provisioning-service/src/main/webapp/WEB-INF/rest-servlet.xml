@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context" 
+  xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+  xmlns:mvc="http://www.springframework.org/schema/mvc" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:property-placeholder location="classpath:spring-data-mongo.properties" ignore-unresolvable="true" />
+	<context:component-scan base-package="com.github.restapi.provision.controllers" />
+  	<context:annotation-config />
+
+  	<mvc:annotation-driven />
+ 	
+ 	<bean id="mongo" class="com.mongodb.Mongo">
+		<constructor-arg name="addr" ref="address" />
+		<constructor-arg name="options" ref="options" />
+	</bean>
+	
+	<bean id="options" class="com.mongodb.MongoOptions">
+		<property name="connectionsPerHost" value="${mongo.db.pool.size}"/>
+		<property name="maxWaitTime" value="${mongo.db.pool.maxwait}"/>
+	</bean>
+	
+	<bean id="address" class="com.mongodb.ServerAddress">
+		<constructor-arg name="host" value="${mongo.db.host}" />
+		<constructor-arg name="port" value="${mongo.db.port}" />
+	</bean>
+ 	
+	<mongo:db-factory dbname="${mongo.db.name}" mongo-ref="mongo" id="mongoDbFactory" />
+ 
+ 	<bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+		 
+	<bean id="defaultMongoTypeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey"><null/></constructor-arg>
+	</bean>
+		 
+	<bean id="mappingMongoConverter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="defaultMongoTypeMapper" />
+	</bean>
+		 
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
+	</bean>
+	
+	<bean id="userDAO" class="com.github.restapi.provision.dao.UserDAO">
+		<constructor-arg name="injMongoTemplate" ref="mongoTemplate" />
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- one of the properties available; the maximum file size in bytes 
+    	<property name="maxUploadSize" value="100000"/>-->
+	</bean>
+ 
+</beans>

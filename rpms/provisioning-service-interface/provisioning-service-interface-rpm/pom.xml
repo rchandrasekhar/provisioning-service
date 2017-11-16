@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.restapi.codetest.rpm</groupId>
+		<artifactId>provisioning-service-interface</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.github.restapi.codetest.rpm</groupId>
+	<artifactId>provisioning-service-interface-rpm</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Rest API :: Provisioning Service RPM</name>
+    <description>Provisioning Service RPM</description>
+
+   <build>
+       <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <configuration>
+                    <provides>
+                      <provide>provisioning-service-interface-rpm</provide>
+                    </provides>
+                    <mappings>
+                        <mapping>
+                            <directory>/usr/java/jboss7/ivr/deploy</directory>
+                            <username>ivr</username>
+                            <groupname>jboss</groupname>
+                            <filemode>644</filemode>
+                            <sources>
+                                <source>
+                                    <location>target/dependency/ivr/</location>
+                                </source>
+                            </sources>
+                        </mapping>
+                    </mappings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+    <plugins>
+        <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+					<phase>package</phase>
+                    <goals>
+                        <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                    	<outputDirectory>${project.build.directory}/dependency/ivr</outputDirectory>
+                    	<stripVersion>true</stripVersion>
+                        <artifactItems>
+                            <artifactItem>
+								<groupId>com.github.restapi.codetest</groupId>
+								<artifactId>provisioning-service</artifactId>
+                                <version>${project.version}</version>
+								<type>war</type>
+								<destFileName>tecnotree-provisioning-service.war</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>rpm-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+
+</project>

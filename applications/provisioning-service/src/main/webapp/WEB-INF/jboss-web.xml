@@ -1,0 +1,4 @@
+<!-- Form Based JAAS Authentication and Authorization -->
+<jboss-web>
+	<context-root>provision</context-root>
+</jboss-web>

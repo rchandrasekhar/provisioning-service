@@ -1,0 +1,2 @@
+/usr/java/jboss7/bin/jboss-cli.sh -c --command="deploy /usr/java/jboss7/server/deploy/provisioning-service.war --server-groups=default-server-group"
+
